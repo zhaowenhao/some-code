@@ -8,15 +8,12 @@ var table = [];
 
 for (let i = a.length -1; i >=0; i--) {
   let item = a[i];
-  if (i == a.length -1) {
-    table = item.map(cell => [cell]);
-  } else {
-    let temp = [];
-    item.forEach(cell => {
-      temp = [...temp, ...table.map(t => [cell, ...t])];
-    });
-    table = temp;
-  }
+  let temp = [];
+  item.forEach(cell => {
+    let row = table.length ? table.map(t => [cell, ...t]) : [[cell]];
+    temp = [...temp, ...row];
+  });
+  table = temp;
 }
 
 
@@ -45,16 +42,12 @@ var table = [];
 
 for (let i = o.length -1; i >=0; i--) {
   let {values, prop} = o[i];
-  
-  if (i == o.length -1) {
-    table = values.map(v => ({[prop]: v}));
-  } else {
-    let temp = [];
-    values.forEach(v => {
-      temp = [...temp, ...table.map(t => ({[prop]: v, ...t}))];
-    });
-    table = temp;
-  }
+  let temp = [];
+  values.forEach(v => {
+    let row = table.length ? table.map(t => ({[prop]: v, ...t})) : [{[prop]: v}]
+    temp = [...temp, ...row];
+  });
+  table = temp;
 }
 
 
